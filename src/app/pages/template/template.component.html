@@ -1,0 +1,63 @@
+<h4>Formularios <small> Templates </small></h4>
+<h6> Formularo template</h6>
+<hr>
+<form autocomplete="off" (ngSubmit)="guardar(form)" #form="ngForm">
+    <div>
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Nombres</label>
+            <div class="col-8">
+                <input name="nombre" [ngModel]="usuario.nombre" [class.is-invalid]="nombre.invalid && nombre.touched" class="form-control" type="text" required minlength="5" #nombre="ngModel" placeholder="Nombre">
+                <small *ngIf="nombre.invalid && nombre.touched" class="form-text text-danger">Ingrese 5 letras</small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Apellidos</label>
+            <div class="col-8">
+                <input name="apellidos" [ngModel]="usuario.apellidos" [class.is-invalid]="apellidos.invalid && apellidos.touched" class="form-control" type="text" required minlength="5" #apellidos="ngModel" placeholder="Apellidos">
+                <small *ngIf="apellidos.invalid && apellidos.touched" class="form-text text-danger">Ingrese 5 letras</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Correo</label>
+        <div class="col-8">
+            <input name="email" [ngModel]="usuario.email" [class.is-invalid]="correo.invalid && correo.touched" class="form-control" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required #correo="ngModel" placeholder="Correo electrónico" >
+            <small *ngIf="correo.invalid && correo.touched" class="form-text text-danger">Ingrese un email correcto</small>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Paises</label>
+        <div class="col-8">
+            <select name="pais" [disabled] = "paises.length === 0" #pais="ngModel" [ngModel] = "usuario.pais" [class.is-invalid]="pais.invalid && pais.touched" required class="form-control" >
+                <option *ngFor="let pais of paises" [value]="pais.codigo"> {{ pais.nombre }} </option>
+            </select>
+            <small *ngIf="pais.invalid && pais.touched" class="form-text text-danger"> Seleccione un pais </small>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Genero</label>
+        <div class="col-8">
+            <div class="form-check inline">
+                <input type="radio" class="form-check-input" name="genero" [class.is-invalid]="genero.invalid && genero.touched" #genero="ngModel" [ngModel] = "usuario.genero" value="M" required>
+                <label class="form-check-label"> Masculino </label>
+            </div>
+            <div class="form-check inline">
+                <input type="radio" class="form-check-input" name="genero" [class.is-invalid]="genero.invalid && genero.touched" #genero="ngModel" [ngModel] = "usuario.genero" value="F" required>
+                <label class="form-check-label"> Femenimo </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group col-md-8">
+            <button type="submit" class="btn btn-outline-primary btn-block">
+                Guardar
+            </button>
+        </div>
+    </div>
+</form>
